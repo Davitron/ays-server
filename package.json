@@ -1,0 +1,25 @@
+{
+  "name": "ays-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://Andhrah@bitbucket.org/digitallyyours/ays-server.git"
+  },
+  "keywords": [
+    "Freelancing",
+    "Freelancer",
+    "Freelancers",
+    "Recruitment",
+    "Recruiter",
+    "Recruiting",
+    "Employment"
+  ],
+  "author": "Alexandra Collins",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/digitallyyours/ays-server#readme"
+}
