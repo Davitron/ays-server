@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon server/index.js --exec babel-node",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,6 +24,13 @@
   "license": "ISC",
   "homepage": "https://bitbucket.org/digitallyyours/ays-server#readme",
   "dependencies": {
+    "@babel/polyfill": "^7.8.3",
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.3",
+    "@babel/core": "^7.8.3",
+    "@babel/node": "^7.8.3",
+    "@babel/preset-env": "^7.8.3"
   }
 }
