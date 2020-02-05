@@ -9,6 +9,8 @@ export class ErrorFilter implements ExceptionFilter {
     const response = control.getResponse();
     const request = control.getRequest();
 
+    console.log(exception)
+
     const { status: code, message: { error: name, message }} = exception;
 
     const payload =  {
