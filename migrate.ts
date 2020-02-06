@@ -4,7 +4,7 @@ dotenv.config();
 import * as path from 'path';
 import * as childProcess from 'child_process';
 import * as Promise from 'bluebird';
-import { databaseConfig } from './src/shared';
+import { databaseConfig } from './src/shared/database/database';
 import { Sequelize } from 'sequelize-typescript';
 
 const Umzug = require('umzug');
@@ -43,6 +43,7 @@ const umzug = new Umzug({
     },
 
     logging() {
+        // tslint:disable-next-line: no-console
         console.log.apply(null, arguments);
     },
 });
@@ -125,12 +126,15 @@ function cmdHardReset() {
     return new Promise((resolve, reject) => {
         setImmediate(() => {
             try {
+                // tslint:disable-next-line: no-console
                 console.log(`dropdb ${DB_NAME}`);
                 childProcess.spawnSync(`dropdb ${DB_NAME}`);
+                // tslint:disable-next-line: no-console
                 console.log(`createdb ${DB_NAME} --username ${DB_USER}`);
                 childProcess.spawnSync(`createdb ${DB_NAME} --username ${DB_USER}`);
                 resolve();
             } catch (e) {
+                // tslint:disable-next-line: no-console
                 console.log(e);
                 reject(e);
             }
@@ -141,6 +145,7 @@ function cmdHardReset() {
 const cmd = process.argv[2].trim();
 let executedCmd;
 
+// tslint:disable-next-line: no-console
 console.log(`${cmd.toUpperCase()} BEGIN`);
 switch (cmd) {
     case 'status':
@@ -179,12 +184,16 @@ switch (cmd) {
 executedCmd
     .then(result => {
         const doneStr = `${cmd.toUpperCase()} DONE`;
+        // tslint:disable-next-line: no-console
         console.log(doneStr);
+        // tslint:disable-next-line: no-console
         console.log('==============================================================================');
     })
     .catch(err => {
         const errorStr = `${cmd.toUpperCase()} ERROR`;
+        // tslint:disable: no-console
         console.log(errorStr);
+        // tslint:disable-next-line: no-console
         console.log('==============================================================================');
         console.log(err);
         console.log('==============================================================================');
