@@ -9,14 +9,11 @@ import {
   BeforeCreate,
   Default,
   HasOne,
-  HasMany,
-  ForeignKey,
 } from 'sequelize-typescript';
 import { IDefineOptions } from '../../shared';
 import { BadRequestException, HttpException } from '@nestjs/common';
 import * as crypto from 'crypto';
 import { Profile } from '../profile/entities/profile.entity';
-import { BelongsTo } from 'sequelize/types';
 
 const tableOptions: IDefineOptions = {
   timestamp: true,

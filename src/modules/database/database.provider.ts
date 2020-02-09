@@ -20,12 +20,8 @@ export const databaseProvider = [
             config = databaseConfig.development;
       }
       const sequelize = new Sequelize(config);
-      sequelize.addModels([Certification]);
-      sequelize.addModels([WorkExperience]);
-      sequelize.addModels([Education]);
-      sequelize.addModels([Profile]);
-      sequelize.addModels([User]);
-      // await sequelize.sync();
+      sequelize.addModels([User, Profile, Education, WorkExperience, Certification]);
+      await sequelize.sync();
       return sequelize;
     },
   },

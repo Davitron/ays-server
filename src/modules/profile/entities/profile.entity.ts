@@ -5,13 +5,10 @@ import {
   DataType,
   CreatedAt,
   UpdatedAt,
-  BeforeValidate,
-  BeforeCreate,
   ForeignKey,
   Default,
   BelongsTo,
   HasMany,
-  HasOne,
 } from 'sequelize-typescript';
 import { IDefineOptions } from '../../../shared';
 import { User } from '../../users/user.entity';
@@ -91,6 +88,9 @@ export class Profile extends Model<Profile> {
   @ForeignKey(() => User)
   @Column
   userId: number;
+
+  @BelongsTo(() => User)
+  user: User;
 
   @CreatedAt public createdAt: Date;
 
