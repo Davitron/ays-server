@@ -19,6 +19,7 @@ export class ErrorFilter implements ExceptionFilter {
       message: message || 'Internal Server Error',
     };
     response
+      .status(code)
       .json({error: payload });
   }
 }
