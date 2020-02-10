@@ -1,8 +1,11 @@
 import { NestFactory } from '@nestjs/core';
+import * as dotenv from 'dotenv';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { TransformInterceptor } from './shared';
 import { ErrorFilter } from './shared';
+
+dotenv.config();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -23,6 +26,6 @@ async function bootstrap() {
   app.useGlobalInterceptors(new TransformInterceptor());
   app.setGlobalPrefix('/v1/api');
 
-  await app.listen(3000);
+  await app.listen(process.env.PORT || 3000);
 }
 bootstrap();
