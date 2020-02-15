@@ -22,6 +22,7 @@ async function bootstrap() {
   });
   SwaggerModule.setup('docs', app, document);
 
+  app.enableCors();
   app.useGlobalFilters(new ErrorFilter());
   app.useGlobalInterceptors(new TransformInterceptor());
   app.setGlobalPrefix('/v1/api');
