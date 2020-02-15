@@ -8,10 +8,12 @@ import {
   BeforeValidate,
   BeforeCreate,
   Default,
+  HasOne,
 } from 'sequelize-typescript';
 import { IDefineOptions } from '../../shared';
 import { BadRequestException, HttpException } from '@nestjs/common';
 import * as crypto from 'crypto';
+import { Profile } from '../profile/entities/profile.entity';
 
 const tableOptions: IDefineOptions = {
   timestamp: true,
@@ -30,18 +32,6 @@ export class User extends Model<User> {
     primaryKey: true,
   })
   public id: number;
-
-  @Column({
-    type: DataType.CHAR(30),
-    allowNull: false,
-  })
-  public firstName: string;
-
-  @Column({
-      type: DataType.CHAR(30),
-      allowNull: false,
-  })
-  public lastName: string;
 
   @Column({
     type: DataType.CHAR(100),
@@ -76,6 +66,9 @@ export class User extends Model<User> {
   })
   public isVerrified: boolean;
 
+  @HasOne(() => Profile)
+  profile: Profile;
+
   @CreatedAt public createdAt: Date;
 
   @UpdatedAt public updatedAt: Date;
@@ -83,7 +76,7 @@ export class User extends Model<User> {
   @BeforeValidate
   public static validateData(user: User, options: any) {
     if (!options.transaction) { throw new HttpException('Missing Transactions', 500); }
-    if (!user.firstName || !user.lastName || !user.email || !user.password) {
+    if (!user.email || !user.password) {
       throw new BadRequestException('Missing Parameters');
     }
   }

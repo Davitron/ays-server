@@ -4,8 +4,6 @@ export async function up(sequelize) {
       CREATE TYPE role AS ENUM ('JOBSEEKER', 'RECRUITER', 'ADMIN');
       CREATE TABLE "users" (
           "id" SERIAL UNIQUE PRIMARY KEY NOT NULL,
-          "firstName" VARCHAR(30) NOT NULL,
-          "lastName" VARCHAR(30) NOT NULL,
           "email" VARCHAR(100) UNIQUE NOT NULL,
           "role" role NOT NULL,
           "password" TEXT NOT NULL,

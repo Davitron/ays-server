@@ -6,12 +6,14 @@ import { LoginDto } from './dto/login.dto';
 import { JWTService } from './jwt.service';
 import { NewUserDto } from './dto/new-user.dto';
 import { MailService } from '../common/mail/mail.service';
+import { ProfileService } from '../profile/services/profile.service';
 
 @Injectable()
 export class AuthService implements IAuthService {
 
   constructor(
     private userService: UserService,
+    private profileService: ProfileService,
     private jwtService: JWTService,
     private mailService: MailService,
   ) {}
@@ -35,12 +37,15 @@ export class AuthService implements IAuthService {
     if (user) {
       throw new BadRequestException('User is already registered');
     }
-    const createdUser = await await this.userService.create(newUser);
-    const parsed: any  = createdUser.toJSON();
-    if (parsed.email) {
-      await this.mailService.sendRaw('New user created', parsed.email);
-      return 'New user created';
+    const createdUser = await this.userService.create(newUser);
+    // console.log(createdUser);
+    const { id, email }: any = createdUser.toJSON();
+    const { lastName, firstName } = newUser;
+    if (id) {
+      this.profileService.create({ firstName, lastName, userId: id });
+      await this.mailService.sendRaw('new user created', email);
+      return 'new user created';
     }
-    throw new InternalServerErrorException('Unable to create user');
+    throw new InternalServerErrorException('Error occured while creating user');
   }
 }

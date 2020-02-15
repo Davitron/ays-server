@@ -46,7 +46,6 @@ export class UserService implements IUserService {
       });
       // tslint:disable-next-line: curly
       if (!user) throw new NotFoundException('USER IS NOT FOUND');
-      // console.log(user.toJSON());
       user = this._assign(user, newValue);
       return await user.save({
           returning: true,
