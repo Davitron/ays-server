@@ -11,6 +11,7 @@ import {
   Default,
   BelongsTo,
   HasMany,
+  HasOne,
 } from 'sequelize-typescript';
 import { IDefineOptions } from '../../../shared';
 import { User } from '../../users/user.entity';
@@ -59,7 +60,12 @@ export class Profile extends Model<Profile> {
   @Column({
     type: DataType.CHAR(30),
   })
-  public location: string;
+  public country: string;
+
+  @Column({
+    type: DataType.CHAR(30),
+  })
+  public state: string;
 
   @Column({
     type: DataType.CHAR(30),
@@ -83,6 +89,7 @@ export class Profile extends Model<Profile> {
   certifications?: Certification[];
 
   @ForeignKey(() => User)
+  @Column
   userId: number;
 
   @CreatedAt public createdAt: Date;

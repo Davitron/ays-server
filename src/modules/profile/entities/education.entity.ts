@@ -45,15 +45,15 @@ export class Education extends Model<Education> {
   degree: string;
 
   @Column({
-    type: DataType.CHAR(30),
+    type: DataType.CHAR(10),
     allowNull: false,
   })
-  areaOfStudy: string;
+  course: string;
 
   @Column({
     type: DataType.CHAR(500),
   })
-  activities: string;
+  description: string;
 
   @Column({
     type: DataType.DATEONLY,

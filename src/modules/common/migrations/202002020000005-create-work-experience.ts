@@ -7,7 +7,7 @@ export async function up(sequelize) {
           "position" VARCHAR(30) NOT NULL,
           "description" VARCHAR(500) NOT NULL,
           "startDate" DATE NOT NULL DEFAULT CURRENT_DATE,
-          "endDate" DATE NOT NULL DEFAULT CURRENT_DATE,
+          "endDate" DATE DEFAULT CURRENT_DATE,
           "profileId" INTEGER REFERENCES profiles(id),
           "createdAt" TIMESTAMP NOT NULL,
           "updatedAt" TIMESTAMP NOT NULL

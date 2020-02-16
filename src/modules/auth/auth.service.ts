@@ -43,7 +43,7 @@ export class AuthService implements IAuthService {
     const { lastName, firstName } = newUser;
     if (id) {
       this.profileService.create({ firstName, lastName, userId: id });
-      await this.mailService.sendRaw('new user created', email);
+      // await this.mailService.sendRaw('new user created', email);
       return 'new user created';
     }
     throw new InternalServerErrorException('Error occured while creating user');

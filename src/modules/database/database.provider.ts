@@ -25,7 +25,7 @@ export const databaseProvider = [
       sequelize.addModels([Education]);
       sequelize.addModels([Profile]);
       sequelize.addModels([User]);
-      await sequelize.sync();
+      // await sequelize.sync();
       return sequelize;
     },
   },

@@ -15,7 +15,10 @@ export class ProfileDto {
   public readonly profilePic?: string;
 
   @ApiProperty()
-  public readonly location?: string;
+  public readonly country?: string;
+
+  @ApiProperty()
+  public readonly state?: string;
 
   @ApiProperty()
   public readonly phoneNumber?: string;

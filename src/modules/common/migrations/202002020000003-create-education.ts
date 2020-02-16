@@ -4,11 +4,11 @@ export async function up(sequelize) {
       CREATE TABLE "educations" (
           "id" SERIAL UNIQUE PRIMARY KEY NOT NULL,
           "institution" VARCHAR(100) NOT NULL,
-          "degree" VARCHAR(30) NOT NULL,
-          "areaOfStudy" VARCHAR(30) NOT NULL,
-          "activities" VARCHAR(500) NOT NULL,
+          "degree" VARCHAR(10) NOT NULL,
+          "course" VARCHAR(30) NOT NULL,
+          "description" VARCHAR(500) NOT NULL,
           "startDate" DATE NOT NULL DEFAULT CURRENT_DATE,
-          "endDate" DATE NOT NULL DEFAULT CURRENT_DATE,
+          "endDate" DATE DEFAULT CURRENT_DATE,
           "profileId" INTEGER REFERENCES profiles(id),
           "createdAt" TIMESTAMP NOT NULL,
           "updatedAt" TIMESTAMP NOT NULL
