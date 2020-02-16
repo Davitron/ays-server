@@ -5,15 +5,9 @@ import {
   DataType,
   CreatedAt,
   UpdatedAt,
-  BeforeValidate,
-  BeforeCreate,
-  Default,
-  BelongsTo,
   ForeignKey,
 } from 'sequelize-typescript';
 import { IDefineOptions } from '../../../shared';
-import { BadRequestException, HttpException } from '@nestjs/common';
-import { FindValueSubscriber } from 'rxjs/internal/operators/find';
 import { Profile } from './profile.entity';
 
 const tableOptions: IDefineOptions = {
@@ -39,13 +33,13 @@ export class Education extends Model<Education> {
   institution: string;
 
   @Column({
-    type: DataType.CHAR(30),
+    type: DataType.CHAR(10),
     allowNull: false,
   })
   degree: string;
 
   @Column({
-    type: DataType.CHAR(10),
+    type: DataType.CHAR(30),
     allowNull: false,
   })
   course: string;
