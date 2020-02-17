@@ -27,24 +27,24 @@ export class Certification extends Model<Certification> {
   public id: number;
 
   @Column({
-    type: DataType.STRING,
+    type: DataType.CHAR(50),
     allowNull: false,
   })
   organization: string;
 
   @Column({
-    type: DataType.STRING,
+    type: DataType.CHAR(50),
     allowNull: false,
   })
   title: string;
 
   @Column({
-    type: DataType.STRING,
+    type: DataType.CHAR(500),
   })
   description: string;
 
   @Column({
-    type: DataType.STRING,
+    type: DataType.CHAR(50),
     allowNull: false,
   })
   linkToDoc: string;

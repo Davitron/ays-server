@@ -1,22 +1,21 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, MaxLength, IsOptional } from 'class-validator';
-import { Type } from 'class-transformer';
 
-export class ProfileDto {
+export class UpdateProfileDto {
   @IsOptional()
   @MaxLength(30)
   @ApiProperty()
   public readonly title?: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @MaxLength(30)
   @ApiProperty()
-  public readonly firstName: string;
+  public readonly firstName?: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @MaxLength(30)
   @ApiProperty()
-  public readonly lastName: string;
+  public readonly lastName?: string;
 
   @IsOptional()
   @MaxLength(500)
@@ -42,8 +41,4 @@ export class ProfileDto {
   @MaxLength(30)
   @ApiProperty()
   public readonly phoneNumber?: string;
-
-  @IsOptional()
-  @ApiProperty()
-  public readonly userId?: number;
 }

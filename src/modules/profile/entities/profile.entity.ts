@@ -5,8 +5,6 @@ import {
   DataType,
   CreatedAt,
   UpdatedAt,
-  BeforeValidate,
-  BeforeCreate,
   ForeignKey,
   Default,
   BelongsTo,
@@ -52,6 +50,11 @@ export class Profile extends Model<Profile> {
   public lastName: string;
 
   @Column({
+    type: DataType.CHAR(500),
+  })
+  public headline: string;
+
+  @Column({
     type: DataType.CHAR(50),
   })
   public profilePic: string;
@@ -59,7 +62,12 @@ export class Profile extends Model<Profile> {
   @Column({
     type: DataType.CHAR(30),
   })
-  public location: string;
+  public country: string;
+
+  @Column({
+    type: DataType.CHAR(30),
+  })
+  public state: string;
 
   @Column({
     type: DataType.CHAR(30),
@@ -83,7 +91,11 @@ export class Profile extends Model<Profile> {
   certifications?: Certification[];
 
   @ForeignKey(() => User)
+  @Column
   userId: number;
+
+  @BelongsTo(() => User)
+  user: User;
 
   @CreatedAt public createdAt: Date;
 

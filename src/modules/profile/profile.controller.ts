@@ -14,10 +14,16 @@ import { WorkExperienceDto } from './dto/new-work-experience.dto';
 import { WorkExperience } from './entities/work-experience.entity';
 import { WorkExperienceService } from './services/work-experience.service';
 import { UpdateWorkExperienceDto } from './dto/update-work-experience.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiTags, ApiHeader } from '@nestjs/swagger';
+import { ProfileDto } from './dto/profile.dto';
+import { UpdateProfileDto } from './dto/update.profile.dto';
 
 @ApiTags('profile')
-@Controller('profiles')
+@ApiHeader({
+  name: 'user-key',
+  description: 'Login token',
+})
+@Controller('profile')
 @UseGuards(AuthGuard)
 export class ProfileController {
   constructor(
@@ -28,7 +34,7 @@ export class ProfileController {
   ) {}
 
   @Get(':profileId')
-  public async getProfileById(@Param('profileId') profileId) {
+  public async getProfileById(@Param('profileId') profileId: number) {
     return this.profileService.getProfile(profileId);
   }
 
@@ -39,8 +45,9 @@ export class ProfileController {
   }
 
   @Put()
+  @UseGuards(CheckProfileGuard)
   public async updateProfile(
-    @Body() profile,
+    @Body() profile: UpdateProfileDto ,
     @Request() req: any,
   ): Promise<Profile> {
     return this.profileService.update(profile, req.userId);
