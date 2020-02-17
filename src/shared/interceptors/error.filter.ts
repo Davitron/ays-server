@@ -1,5 +1,14 @@
 
 import { Injectable, ExceptionFilter, Catch, ArgumentsHost, HttpException, HttpStatus } from '@nestjs/common';
+import { Response } from './response.interceptor';
+
+const handleValidationError = (error: any) => {
+  const response = error.map(err => {
+    const { property, constraints } = err;
+    return { property, constraints };
+  });
+  return response;
+};
 
 @Injectable()
 @Catch()
@@ -9,14 +18,22 @@ export class ErrorFilter implements ExceptionFilter {
     const response = control.getResponse();
     const request = control.getRequest();
 
-    console.log(exception);
+    const { status: code } = exception;
+    let {message: { error: name, message }} = exception;
+    let data: Response<any>;
 
-    const { status: code, message: { error: name, message }} = exception;
+    if (typeof message !== 'string') {
+      const validtionError = message;
+      message = 'Invalid Request';
+      data = handleValidationError(validtionError);
+    }
 
     const payload =  {
-      name: name || undefined,
-      code: code || null,
-      message: message || 'Internal Server Error',
+      ...(name && { name }),
+      ...(code && { code }),
+      ...((message)  && { message } ),
+      ...(data && { type: 'VALIDATION'}),
+      ...(data && { data }),
     };
     response
       .status(code)
