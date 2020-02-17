@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsNotEmpty, MaxLength, IsDate } from 'class-validator';
+import { IsNotEmpty, MaxLength, IsDate } from 'class-validator';
+import { Type } from 'class-transformer';
 
 export class NewCertificationDto {
 
@@ -25,11 +26,13 @@ export class NewCertificationDto {
 
   @IsNotEmpty()
   @IsDate()
+  @Type(() => Date)
   @ApiProperty()
   public readonly issueDate: Date;
 
   @IsNotEmpty()
   @IsDate()
+  @Type(() => Date)
   @ApiProperty()
   public readonly expiryDate: Date;
 }

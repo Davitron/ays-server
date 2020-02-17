@@ -10,7 +10,7 @@ dotenv.config();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(new ValidationPipe({ forbidUnknownValues: true }));
   const options = new DocumentBuilder()
   .setTitle('AYS SERVER')
   .setDescription('The AYS server API description')

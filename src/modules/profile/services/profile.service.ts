@@ -2,6 +2,7 @@ import { Sequelize } from 'sequelize-typescript';
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { IProfileService } from '../interfaces/profile-service.interface';
 import { ProfileDto } from '../dto/profile.dto';
+import { UpdateProfileDto } from '../dto/update.profile.dto';
 import { Profile } from '../entities/profile.entity';
 import { WorkExperience } from '../entities/work-experience.entity';
 import { Education } from '../entities/education.entity';
@@ -44,7 +45,7 @@ export class ProfileService implements IProfileService {
     });
   }
 
-  public async update(profileData: ProfileDto, userId?: number): Promise<Profile> {
+  public async update(profileData: UpdateProfileDto, userId?: number): Promise<Profile> {
     return await this.sequelizeInstance.transaction(async transaction => {
       let profile = await this.profileRepository.findOne<Profile>({ where: { userId }});
       profile = this._assign(profile, profileData);
@@ -52,7 +53,7 @@ export class ProfileService implements IProfileService {
     });
   }
 
-  private _assign(profile: Profile, newValue: ProfileDto): Profile {
+  private _assign(profile: Profile, newValue: UpdateProfileDto): Profile {
     for (const key of Object.keys(profile.toJSON())) {
         // tslint:disable-next-line: curly
         if ((profile[key] !== newValue[key]) && newValue[key]) {

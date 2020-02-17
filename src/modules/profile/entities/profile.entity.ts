@@ -50,6 +50,11 @@ export class Profile extends Model<Profile> {
   public lastName: string;
 
   @Column({
+    type: DataType.CHAR(500),
+  })
+  public headline: string;
+
+  @Column({
     type: DataType.CHAR(50),
   })
   public profilePic: string;

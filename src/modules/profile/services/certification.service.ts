@@ -19,6 +19,7 @@ export class CertificationService implements ICertificationService {
   }
 
   async update(certificationId: number, newValues: UpdateCertificationDto, profileId: number): Promise<Certification | null> {
+    console.log(newValues)
     return await this.sequelizeInstance.transaction(async transaction => {
       let certification = await this.educationRepository.findByPk<Certification>(certificationId);
       if (!certification) {throw new NotFoundException('Certification not found'); }
@@ -26,10 +27,7 @@ export class CertificationService implements ICertificationService {
         throw new UnauthorizedException('you are not authorized to perform this action');
       }
       certification = this._assign(certification, newValues);
-      return await certification.save({
-        returning: true,
-        transaction,
-      } as CreateOptions);
+      return await certification.save();
     });
   }
 
@@ -46,7 +44,7 @@ export class CertificationService implements ICertificationService {
 
   private _assign(certification: Certification, newValue: UpdateCertificationDto): Certification {
     for (const key of Object.keys(certification.toJSON())) {
-        if ((certification[key] !== newValue[key]) && certification[key]) {
+        if ((certification[key] !== newValue[key]) && newValue[key]) {
           certification[key] = newValue[key];
         }
     }

@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, MaxLength, IsDate } from 'class-validator';
+import { Type } from 'class-transformer';
 
 export class NewEducationDto {
   @IsNotEmpty()
@@ -24,11 +25,13 @@ export class NewEducationDto {
 
   @IsNotEmpty()
   @IsDate()
+  @Type(() => Date)
   @ApiProperty()
   public readonly startDate: Date;
 
   @IsNotEmpty()
   @IsDate()
+  @Type(() => Date)
   @ApiProperty()
   public readonly endDate: Date;
 }

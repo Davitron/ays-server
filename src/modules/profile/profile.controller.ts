@@ -16,6 +16,7 @@ import { WorkExperienceService } from './services/work-experience.service';
 import { UpdateWorkExperienceDto } from './dto/update-work-experience.dto';
 import { ApiTags, ApiHeader } from '@nestjs/swagger';
 import { ProfileDto } from './dto/profile.dto';
+import { UpdateProfileDto } from './dto/update.profile.dto';
 
 @ApiTags('profile')
 @ApiHeader({
@@ -44,8 +45,9 @@ export class ProfileController {
   }
 
   @Put()
+  @UseGuards(CheckProfileGuard)
   public async updateProfile(
-    @Body() profile: ProfileDto,
+    @Body() profile: UpdateProfileDto ,
     @Request() req: any,
   ): Promise<Profile> {
     return this.profileService.update(profile, req.userId);

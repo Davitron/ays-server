@@ -48,7 +48,7 @@ export class EducationService implements IEducationService {
   private _assign(education: Education, newValue: UpdateEducationDto): Education {
     for (const key of Object.keys(education.toJSON())) {
         // tslint:disable-next-line: curly
-        if ((education[key] !== newValue[key]) && education[key]) {
+        if ((education[key] !== newValue[key]) && newValue[key]) {
           education[key] = newValue[key];
         }
     }

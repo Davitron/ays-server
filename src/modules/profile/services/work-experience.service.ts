@@ -48,7 +48,7 @@ export class WorkExperienceService implements IWorkExperience {
   private _assign(workexperience: WorkExperience, newValue: UpdateWorkExperienceDto): WorkExperience {
     for (const key of Object.keys(workexperience.toJSON())) {
         // tslint:disable-next-line: curly
-        if ((workexperience[key] !== newValue[key]) && workexperience[key]) {
+        if ((workexperience[key] !== newValue[key]) && newValue[key]) {
           workexperience[key] = newValue[key];
         }
     }
