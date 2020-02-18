@@ -5,16 +5,19 @@
   "author": "",
   "license": "MIT",
   "engines": {
-    "node": "13.x"
+    "node": "13.6.0",
+    "yarn": "1.21.1"
   },
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start": "NODE_ENV=production nest start",
+    "start:prod": "nest start",
     "start:dev": "nest start --watch",
+    "start": "NODE_ENV=production node dist/src/main.js",
+    "prestart:prod": "rimraf dist && npm run build",
+    "postinstall": "yarn run prestart:prod",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/main",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "test": "jest",
     "test:watch": "jest --watch",
