@@ -26,7 +26,7 @@ import { ProfileModule } from './modules/profile/profile.module';
       },
       // template: {
       //   dir: __dirname + '/templates',
-      //   adapter: new PugAdapter(), // or new PugAdapter()
+      //   adapter: new PugAdapter(),
       //   options: {
       //     strict: true,
       //   },
