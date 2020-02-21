@@ -1,9 +1,13 @@
 import { Module } from '@nestjs/common';
-import { MailService } from './mail.service';
+import { RawMailService } from './services/raw-mail.service';
+import { TemplateMailService } from './services/template-mail.service';
+import { MailService } from './services/mail.service';
+import { MailFactory } from './mail.factory';
+import { MailerModule } from '@nest-modules/mailer';
 
 @Module({
-  imports: [],
-  providers: [MailService],
+  imports: [MailerModule],
+  providers: [RawMailService, TemplateMailService, MailFactory, MailService],
   exports: [MailService],
 })
 

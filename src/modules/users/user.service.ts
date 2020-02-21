@@ -1,6 +1,7 @@
 import { Inject, Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { IUser, IUserService } from './interfaces';
 import { User } from './user.entity';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 interface CreateOptions {
   returning?: boolean;
@@ -39,7 +40,7 @@ export class UserService implements IUserService {
       throw new BadRequestException(error);
     }
   }
-  public async update(id: number, newValue: IUser): Promise<User> {
+  public async update(id: number, newValue: UpdateUserDto): Promise<User> {
     return await this.sequelizeInstance.transaction(async transaction => {
       let user = await this.userRepository.findByPk<User>(id, {
           transaction,
@@ -54,10 +55,10 @@ export class UserService implements IUserService {
     });
   }
 
-  private _assign(user: User, newValue: IUser): User {
+  private _assign(user: User, newValue: UpdateUserDto): User {
     for (const key of Object.keys(user.toJSON())) {
         // tslint:disable-next-line: curly
-        if (user[key] !== newValue[key]) {
+        if ((user[key] !== newValue[key]) && newValue[key]) {
           user[key] = newValue[key];
         }
     }

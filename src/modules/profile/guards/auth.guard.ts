@@ -9,7 +9,6 @@ export class AuthGuard implements CanActivate {
     @Inject('UserRepository') public readonly userRepository: typeof User,
   ) {}
 
-
   async validateToken(reqToken: string) {
     const [ bearer, token ] = reqToken.split(' ');
     if (bearer === 'Bearer') {
