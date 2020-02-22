@@ -9,12 +9,14 @@ import {
   Default,
   BelongsTo,
   HasMany,
+  HasOne,
 } from 'sequelize-typescript';
 import { IDefineOptions } from '../../../shared';
 import { User } from '../../users/user.entity';
 import { Education } from './education.entity';
 import { WorkExperience } from './work-experience.entity';
 import { Certification } from './certification.entity';
+import { RecruiterInfo } from './recruiter-info.entity';
 
 const tableOptions: IDefineOptions = {
   timestamp: true,
@@ -89,6 +91,9 @@ export class Profile extends Model<Profile> {
 
   @HasMany(() => Certification)
   certifications?: Certification[];
+
+  @HasOne(() => RecruiterInfo)
+  employerInfo?: RecruiterInfo;
 
   @ForeignKey(() => User)
   @Column

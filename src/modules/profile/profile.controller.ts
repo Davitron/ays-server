@@ -38,15 +38,16 @@ export class ProfileController {
     private recruiterInfoService: RecruiterInfoService,
   ) {}
 
-  @Get(':profileId')
-  public async getProfileById(@Param('profileId') profileId: number) {
-    return this.profileService.getProfile(profileId);
-  }
+  // TODO: refacator to getProfilePublic
+  // @Get(':profileId')
+  // public async getProfileById(@Param('profileId') profileId: number) {
+  //   return this.profileService.getProfile(profileId);
+  // }
 
   @Get()
   @UseGuards(CheckProfileGuard)
   public async getProfile(@Request() req: any) {
-    return this.profileService.getProfile(req.profileId);
+    return this.profileService.getProfile(req.profileId, req.userRole);
   }
 
   @Put()

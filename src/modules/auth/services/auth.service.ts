@@ -44,7 +44,7 @@ export class AuthService implements IAuthService {
     if (!user) {
       throw new UnauthorizedException('Incorrect user credentials');
     }
-    const token = this.jwtService.createToken({id: user.id, email: user.email });
+    const token = this.jwtService.createToken({id: user.id, email: user.email, role: user.role });
     return token;
   }
 

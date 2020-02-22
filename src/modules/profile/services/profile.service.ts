@@ -8,11 +8,25 @@ import { WorkExperience } from '../entities/work-experience.entity';
 import { Education } from '../entities/education.entity';
 import { Certification } from '../entities/certification.entity';
 import { User } from 'src/modules/users/user.entity';
+import { RecruiterInfo } from '../entities/recruiter-info.entity';
 
-const profileAttr = [ 'id', 'title', 'firstName', 'lastName', 'profilePic', 'country', 'state', 'phoneNumber', 'profileViews', 'createdAt'];
+const profileAttr = [ 'id', 'headline', 'aboutMe', 'firstName', 'lastName', 'profilePic', 'country', 'state', 'phoneNumber', 'profileViews', 'createdAt'];
 const workAttr = ['id', 'company', 'position', 'description', 'startDate', 'endDate'];
 const educationAttr = ['id', 'institution', 'degree', 'course', 'description', 'startDate', 'endDate' ];
 const certAttr = ['id', 'organization', 'title', 'linkToDoc', 'description', 'issueDate', 'expiryDate' ];
+const recruiterAttr = ['id', 'company', 'position', 'address', 'referer', 'phoneNumber', 'website'];
+
+const logicalInclude = (role: string) => {
+  if (role === 'JOBSEEKER') {
+    return [
+      { model: WorkExperience, attributes: [...workAttr]},
+      { model: Education, attributes: [...educationAttr]},
+      { model: Certification, attributes: [...certAttr]},
+    ];
+  } else if (role === 'RECRUITER') {
+    return [ { model: RecruiterInfo, attributes: [...recruiterAttr]} ];
+  }
+};
 
 @Injectable()
 export class ProfileService implements IProfileService {
@@ -22,16 +36,17 @@ export class ProfileService implements IProfileService {
     @Inject('SequelizeInstance') private readonly sequelizeInstance,
     ) {}
 
-  public async getProfile(profileId?: number): Promise<Profile> {
+  public async getProfile(profileId?: number, role?: string): Promise<Profile> {
     const profile = await this.profileRepository.findByPk<Profile>(profileId, {
       attributes: [
         ...profileAttr,
         [Sequelize.literal('"user"."email"'), 'email'],
       ],
       include: [
-        { model: WorkExperience, attributes: [...workAttr]},
-        { model: Education, attributes: [...educationAttr]},
-        { model: Certification, attributes: [...certAttr]},
+        ...logicalInclude(role),
+        // { model: WorkExperience, attributes: [...workAttr]},
+        // { model: Education, attributes: [...educationAttr]},
+        // { model: Certification, attributes: [...certAttr]},
         { model: User, attributes: []},
       ],
     });
