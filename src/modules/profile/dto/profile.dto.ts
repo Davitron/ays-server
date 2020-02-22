@@ -3,10 +3,6 @@ import { IsNotEmpty, MaxLength, IsOptional } from 'class-validator';
 import { Type } from 'class-transformer';
 
 export class ProfileDto {
-  @IsOptional()
-  @MaxLength(30)
-  @ApiProperty()
-  public readonly title?: string;
 
   @IsNotEmpty()
   @MaxLength(30)
@@ -20,6 +16,11 @@ export class ProfileDto {
 
   @IsOptional()
   @MaxLength(500)
+  @ApiProperty()
+  public readonly aboutMe?: string;
+
+  @IsOptional()
+  @MaxLength(30)
   @ApiProperty()
   public readonly headline?: string;
 
