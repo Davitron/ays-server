@@ -2,10 +2,6 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, MaxLength, IsOptional } from 'class-validator';
 
 export class UpdateProfileDto {
-  @IsOptional()
-  @MaxLength(30)
-  @ApiProperty()
-  public readonly title?: string;
 
   @IsOptional()
   @MaxLength(30)
@@ -18,9 +14,14 @@ export class UpdateProfileDto {
   public readonly lastName?: string;
 
   @IsOptional()
-  @MaxLength(500)
+  @MaxLength(30)
   @ApiProperty()
   public readonly headline?: string;
+
+  @IsOptional()
+  @MaxLength(500)
+  @ApiProperty()
+  public readonly aboutMe?: string;
 
   @IsOptional()
   @MaxLength(500)

@@ -64,7 +64,7 @@ export class User extends Model<User> {
     type: DataType.BOOLEAN,
     allowNull: false,
   })
-  public isVerrified: boolean;
+  public isVerified: boolean;
 
   @HasOne(() => Profile)
   profile: Profile;

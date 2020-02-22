@@ -17,6 +17,10 @@ import { UpdateWorkExperienceDto } from './dto/update-work-experience.dto';
 import { ApiTags, ApiHeader } from '@nestjs/swagger';
 import { ProfileDto } from './dto/profile.dto';
 import { UpdateProfileDto } from './dto/update.profile.dto';
+import { RecruiterInfo } from './entities/recruiter-info.entity';
+import { RecruiterInfoRequestDto } from './dto/new-recruiter-info.dto';
+import { RecruiterInfoService } from './services/recruiter-info.service';
+import { UpdateRecruiterInfoDto } from './dto/update-recruiter-info.dto';
 
 @ApiTags('profile')
 @ApiHeader({
@@ -31,17 +35,19 @@ export class ProfileController {
     private educationService: EducationService,
     private certificationService: CertificationService,
     private workExperienceService: WorkExperienceService,
+    private recruiterInfoService: RecruiterInfoService,
   ) {}
 
-  @Get(':profileId')
-  public async getProfileById(@Param('profileId') profileId: number) {
-    return this.profileService.getProfile(profileId);
-  }
+  // TODO: refacator to getProfilePublic
+  // @Get(':profileId')
+  // public async getProfileById(@Param('profileId') profileId: number) {
+  //   return this.profileService.getProfile(profileId);
+  // }
 
   @Get()
   @UseGuards(CheckProfileGuard)
   public async getProfile(@Request() req: any) {
-    return this.profileService.getProfile(req.profileId);
+    return this.profileService.getProfile(req.profileId, req.userRole);
   }
 
   @Put()
@@ -138,5 +144,25 @@ export class ProfileController {
     @Request() req: any,
   ): Promise<void> {
     return await this.workExperienceService.delete(workExperienceId, req.profileId);
+  }
+
+  @Post('recruiter')
+  @UseGuards(CheckProfileGuard)
+  public async createRecruiterInfo(
+    @Body() recruiter: RecruiterInfoRequestDto,
+    @Request() req: any,
+  ): Promise<RecruiterInfo> {
+    const newRecruiter = {...recruiter, profileId: req.profileId};
+    return await this.recruiterInfoService.create(newRecruiter);
+  }
+
+  @Put('recruiter/:recruiterInfoId')
+  @UseGuards(CheckProfileGuard)
+  public async updateRecruiterInfo(
+    @Body() recruiter: UpdateRecruiterInfoDto,
+    @Param('recruiterInfoId') recruiterInfoId: number,
+    @Request() req: any,
+  ): Promise<RecruiterInfo> {
+    return await this.recruiterInfoService.update(recruiterInfoId, recruiter, req.profileId);
   }
 }

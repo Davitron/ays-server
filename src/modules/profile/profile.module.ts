@@ -10,6 +10,8 @@ import { workProvider } from './providers/work-experience.providers';
 import { educationProvider } from './providers/education.provider';
 import { certificationProvider } from './providers/certification.providers';
 import { usersProvider } from '../users/user.provider';
+import { recruiterInfoProvider } from './providers/recruiter-info.providers';
+import { RecruiterInfoService } from './services/recruiter-info.service';
 
 @Module({
   imports: [DatabaseModule],
@@ -20,10 +22,12 @@ import { usersProvider } from '../users/user.provider';
     EducationService,
     CertificationService,
     profilesProvider,
+    RecruiterInfoService,
     workProvider,
     educationProvider,
     certificationProvider,
     usersProvider,
+    recruiterInfoProvider,
   ],
   exports: [ ProfileService ],
 })

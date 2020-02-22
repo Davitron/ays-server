@@ -3,7 +3,6 @@ import { ICertificationService } from '../interfaces/certification-service.inter
 import { Certification } from '../entities/certification.entity';
 import { NewCertificationDto } from '../dto/new-certification.dto';
 import { UpdateCertificationDto } from '../dto/update-certification.dto';
-import { CreateOptions } from 'sequelize/types';
 
 @Injectable()
 export class CertificationService implements ICertificationService {
@@ -19,7 +18,6 @@ export class CertificationService implements ICertificationService {
   }
 
   async update(certificationId: number, newValues: UpdateCertificationDto, profileId: number): Promise<Certification | null> {
-    console.log(newValues)
     return await this.sequelizeInstance.transaction(async transaction => {
       let certification = await this.educationRepository.findByPk<Certification>(certificationId);
       if (!certification) {throw new NotFoundException('Certification not found'); }

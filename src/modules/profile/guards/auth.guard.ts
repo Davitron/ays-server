@@ -13,10 +13,10 @@ export class AuthGuard implements CanActivate {
     const [ bearer, token ] = reqToken.split(' ');
     if (bearer === 'Bearer') {
       try {
-        const  { id }: any = jwt.verify(token, process.env.JWT_SECRET);
+        const  { id, role }: any = jwt.verify(token, process.env.JWT_SECRET);
         const user = await this.userRepository.findByPk<User>(id);
         if (!user) { return null; }
-        return id;
+        return { id, role };
       } catch (error) {
         return null;
       }
@@ -30,7 +30,11 @@ export class AuthGuard implements CanActivate {
     if (!bearerToken) {
       throw new UnauthorizedException('You are not authorized to view this');
     }
-    request.userId = await this.validateToken(bearerToken);
+
+    const { id, role } = await this.validateToken(bearerToken);
+    request.userId = id;
+    request.userRole = role;
+
     return true;
   }
 }

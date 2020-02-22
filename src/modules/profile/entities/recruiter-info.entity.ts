@@ -12,11 +12,11 @@ import { Profile } from './profile.entity';
 
 const tableOptions: IDefineOptions = {
   timestamp: true,
-  tableName: 'work_experience',
+  tableName: 'recruiter_info',
 } as IDefineOptions;
 
 @Table(tableOptions)
-export class WorkExperience extends Model<WorkExperience> {
+export class RecruiterInfo extends Model<RecruiterInfo> {
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
@@ -39,21 +39,27 @@ export class WorkExperience extends Model<WorkExperience> {
   position: string;
 
   @Column({
-    type: DataType.CHAR(500),
-  })
-  description: string;
-
-  @Column({
-    type: DataType.DATEONLY,
+    type: DataType.CHAR(100),
     allowNull: false,
   })
-  startDate: Date;
+  address: string;
 
   @Column({
-    type: DataType.DATEONLY,
+    type: DataType.CHAR(15),
     allowNull: false,
   })
-  endDate: Date;
+  phoneNumber: string;
+
+  @Column({
+    type: DataType.CHAR(100),
+  })
+  website: string;
+
+  @Column({
+    type: DataType.CHAR(30),
+    allowNull: false,
+  })
+  referer: string;
 
   @ForeignKey(() => Profile)
   @Column

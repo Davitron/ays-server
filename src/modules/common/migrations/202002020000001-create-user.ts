@@ -7,7 +7,7 @@ export async function up(sequelize) {
           "email" VARCHAR(100) UNIQUE NOT NULL,
           "role" role NOT NULL,
           "password" TEXT NOT NULL,
-          "isVerrified" BOOLEAN NOT NULL,
+          "isVerified" BOOLEAN NOT NULL,
           "createdAt" TIMESTAMP NOT NULL,
           "updatedAt" TIMESTAMP NOT NULL
       );
