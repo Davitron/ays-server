@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, MaxLength, IsOptional } from 'class-validator';
+import { IsNotEmpty, MaxLength, IsOptional, IsString } from 'class-validator';
 
 export class UpdateProfileDto {
 
@@ -22,6 +22,11 @@ export class UpdateProfileDto {
   @MaxLength(500)
   @ApiProperty()
   public readonly aboutMe?: string;
+
+  @IsOptional()
+  @IsString({ each: true })
+  @ApiProperty()
+  public readonly skills?: string[];
 
   @IsOptional()
   @MaxLength(500)

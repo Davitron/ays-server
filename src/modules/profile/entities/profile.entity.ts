@@ -57,6 +57,11 @@ export class Profile extends Model<Profile> {
   public aboutMe: string;
 
   @Column({
+    type: DataType.ARRAY(DataType.TEXT),
+  })
+  public skills: string[];
+
+  @Column({
     type: DataType.CHAR(50),
   })
   public profilePic: string;

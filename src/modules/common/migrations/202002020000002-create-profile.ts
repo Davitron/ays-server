@@ -7,6 +7,7 @@ export async function up(sequelize) {
           "lastName" VARCHAR(30) NOT NULL,
           "headline" VARCHAR(30),
           "aboutMe" VARCHAR(500),
+          "skills" TEXT[],
           "country" VARCHAR(30),
           "state" VARCHAR(30),
           "phoneNumber" VARCHAR(30),

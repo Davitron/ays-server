@@ -44,9 +44,6 @@ export class ProfileService implements IProfileService {
       ],
       include: [
         ...logicalInclude(role),
-        // { model: WorkExperience, attributes: [...workAttr]},
-        // { model: Education, attributes: [...educationAttr]},
-        // { model: Certification, attributes: [...certAttr]},
         { model: User, attributes: []},
       ],
     });
