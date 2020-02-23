@@ -18,7 +18,8 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "migrate": "ts-node migrate.ts"
+    "migrate": "ts-node migrate.ts",
+    "compodoc": "npx compodoc -s -r 9000 -p tsconfig.json -s"
   },
   "dependencies": {
     "@nest-modules/mailer": "^1.1.3",
@@ -46,6 +47,7 @@
     "umzug": "^2.2.0"
   },
   "devDependencies": {
+    "@compodoc/compodoc": "^1.1.11",
     "@nestjs/cli": "^6.9.0",
     "@nestjs/schematics": "^6.7.0",
     "@nestjs/testing": "^6.7.1",
