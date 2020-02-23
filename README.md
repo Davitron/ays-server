@@ -43,3 +43,8 @@
 ```
   http://localhost:3000/docs
 ```
+
+### APP Documention
+```
+$ yarn run compodoc
+```
