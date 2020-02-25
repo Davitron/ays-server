@@ -14,5 +14,8 @@
     "statusBarItem.hoverBackground": "#f0c9c9",
     "statusBar.foreground": "#15202b"
   },
-  "peacock.color": "#fbf1f1"
+  "peacock.color": "#fbf1f1",
+  "files.exclude": {
+    "**/.git": false
+  }
 }
