@@ -30,7 +30,7 @@ export class AuthService implements IAuthService {
     try {
       return await this.mailService.sendMail(mailInfo, 'raw');
     } catch (error) {
-      throw new InternalServerErrorException(error.message);
+      // throw new InternalServerErrorException(error.message);
     }
   }
 
@@ -58,7 +58,7 @@ export class AuthService implements IAuthService {
     const { lastName, firstName } = newUser;
     if (id) {
       this.profileService.create({ firstName, lastName, userId: id });
-      await this._sendActivationLink({ id, email });
+      this._sendActivationLink({ id, email });
       return 'new user created';
     }
     throw new InternalServerErrorException('Error occured while creating user');
