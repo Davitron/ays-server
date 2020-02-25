@@ -31,7 +31,9 @@ export class AuthGuard implements CanActivate {
       throw new UnauthorizedException('You are not authorized to view this');
     }
 
-    const { id, role } = await this.validateToken(bearerToken);
+    const user = await this.validateToken(bearerToken);
+    if (!user) { throw new UnauthorizedException('You are not authorized to view this'); }
+    const { id, role } = user;
     request.userId = id;
     request.userRole = role;
 
