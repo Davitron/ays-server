@@ -1,11 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
 import { databaseConfig } from '../../shared/database/database';
-import { User } from '../users/user.entity';
-import { Profile } from '../profile/entities/profile.entity';
-import { Education } from '../profile/entities/education.entity';
-import { WorkExperience } from '../profile/entities/work-experience.entity';
-import { Certification } from '../profile/entities/certification.entity';
-import { RecruiterInfo } from '../profile/entities/recruiter-info.entity';
+import { models } from './models';
 
 export const databaseProvider = [
   {
@@ -21,7 +16,7 @@ export const databaseProvider = [
             config = databaseConfig.development;
       }
       const sequelize = new Sequelize(config);
-      sequelize.addModels([User, Profile, Education, WorkExperience, Certification, RecruiterInfo]);
+      sequelize.addModels([...models]);
       await sequelize.sync();
       return sequelize;
     },

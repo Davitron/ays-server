@@ -4,7 +4,7 @@ import { Profile } from './entities/profile.entity';
 import { NewEducationDto } from './dto/new-education.dto';
 import { Education } from './entities/education.entity';
 import { UpdateEducationDto } from './dto/update-education.dto';
-import { AuthGuard, CheckProfileGuard } from './guards';
+import { AuthGuard, CheckProfileGuard } from '../../shared/guards';
 import { EducationService } from './services/education.service';
 import { CertificationService } from './services/certification.service';
 import { NewCertificationDto } from './dto/new-certification.dto';
