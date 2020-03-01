@@ -7,6 +7,7 @@ import { DatabaseModule } from './modules/database/database.module';
 import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { ProfileModule } from './modules/profile/profile.module';
+import { JobModule } from './modules/job/job.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { ProfileModule } from './modules/profile/profile.module';
     UsersModule,
     AuthModule,
     ProfileModule,
+    JobModule,
   ],
   controllers: [AppController],
   providers: [AppService],

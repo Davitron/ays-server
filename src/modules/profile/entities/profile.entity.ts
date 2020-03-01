@@ -17,6 +17,7 @@ import { Education } from './education.entity';
 import { WorkExperience } from './work-experience.entity';
 import { Certification } from './certification.entity';
 import { RecruiterInfo } from './recruiter-info.entity';
+import { Job } from 'src/modules/job/entities/job.entity';
 
 const tableOptions: IDefineOptions = {
   timestamp: true,
@@ -99,6 +100,9 @@ export class Profile extends Model<Profile> {
 
   @HasOne(() => RecruiterInfo)
   employerInfo?: RecruiterInfo;
+
+  @HasMany(() => Job)
+  jobs?: Job[];
 
   @ForeignKey(() => User)
   @Column
