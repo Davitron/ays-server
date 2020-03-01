@@ -14,6 +14,7 @@ const handleValidationError = (error: any) => {
 @Catch()
 export class ErrorFilter implements ExceptionFilter {
   catch(exception: any, host: ArgumentsHost) {
+    console.log(exception);
     const control = host.switchToHttp();
     const response = control.getResponse();
     const request = control.getRequest();

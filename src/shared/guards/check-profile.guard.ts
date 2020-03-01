@@ -1,5 +1,5 @@
 import { Inject, Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
-import { Profile } from '../entities/profile.entity';
+import { Profile } from '../../modules/profile/entities/profile.entity';
 
 @Injectable()
 export class CheckProfileGuard implements CanActivate {
