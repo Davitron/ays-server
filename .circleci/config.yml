@@ -1,0 +1,33 @@
+version: 2.1
+executors:
+  my-executor:
+    docker:
+    - image: circleci/node
+    working_directory: ~/repo 
+orbs:
+  aws-ecr: circleci/aws-ecr@6.7.0
+jobs:
+  migration:
+    executor: my-executor
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies and run migration
+          command: |
+            bash ~/repo/.circleci/bin/install-deps.sh
+  build-and-push:
+    executor: my-executor
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Build and push image
+          command: |
+            bash ~/repo/.circleci/bin/build-and-push.sh
+workflows:
+    build-and-test:
+      jobs:
+        - migration
+        - build-and-push:
+            requires:
+              - migration
